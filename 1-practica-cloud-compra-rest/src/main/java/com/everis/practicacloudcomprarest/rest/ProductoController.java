@@ -22,7 +22,7 @@ public class ProductoController {
 	@GetMapping("/comprar/id/{id}/cantidad/{cantidad}")
 	public ProductoResponse convert(@PathVariable Long id,
 			                        @PathVariable BigDecimal cantidad) {
-		String url = "http://localhost:8000/consultarInventario/id/{id}";
+		String url = "http://192.168.1.71:8000/consultarInventario/id/{id}";
 	
 		Map<String, Long> uriVariables = new HashMap<>();
 		uriVariables.put("id", id);
