@@ -12,8 +12,8 @@ public class ProductoService {
 	@Autowired
 	ProductoRepository productoRepositorio;
 	
-	public Producto findByNombre(String nombre) {
-		return productoRepositorio.findByNombre(nombre);
+	public Producto findById(Long id) {
+		return productoRepositorio.findById(id).get();
 	}
 	
 

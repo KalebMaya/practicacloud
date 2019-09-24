@@ -8,5 +8,4 @@ import com.everis.practicacloudinventariorest.model.Producto;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-	Producto findByNombre(String nombre);
 }

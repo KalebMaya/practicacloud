@@ -19,11 +19,11 @@ public class ProductoController {
 	@Autowired
 	private Environment environment;
 	
-	@GetMapping("/consultarInventario/nombre/{nombre}")
-	public ProductoValueResponse retrieveProducto(@PathVariable String nombre) {
+	@GetMapping("/consultarInventario/id/{id}")
+	public ProductoValueResponse retrieveProducto(@PathVariable Long id) {
 		ProductoValueResponse response = new ProductoValueResponse();
 		try {
-			Producto valor = productoServicio.findByNombre(nombre);
+			Producto valor = productoServicio.findById(id);
 			if(valor == null) {
 				response.setMessage("Producto no encontrado");
 				response.setSuccesful(false);
