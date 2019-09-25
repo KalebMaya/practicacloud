@@ -26,22 +26,23 @@ public class ProductoController {
 	private int reorden;
 	
 	@GetMapping("/comprar/id/{id}/cantidad/{cantidad}")
-	public ProductoResponse convert(@PathVariable Long id,
-			                        @PathVariable BigDecimal cantidad) {
+	public ProductoResponse convert(@PathVariable Integer id,
+			                        @PathVariable int cantidad) {
 		ProductoResponse response = new ProductoResponse();
 		try {
 			response = productoServiceProxy.retrieveProducto(id);
-		if((response.getValue().getStock().intValue()*(100-reorden)/100) < cantidad.intValue() ) {
-			response.setSuccessful(false);
+		if((response.getValue().getStock()*(100-reorden)/100) < cantidad ) {
+			response.setSuccesful(false);
 			response.setMessage("inventario insuficiente, su compra no puede ser procesada");
-			response.setIp(InetAddress.getLocalHost().getHostName());
 		} else {
-		response.setSuccessful(true);
-		response.setMessage("Compra exitosa");
+			productoServiceProxy.actualizarStock(id, cantidad);
+			response.setCompra(productoServiceProxy.insertarCompra(id, cantidad));
+			response.setSuccesful(true);
+			response.setMessage("Compra exitosa");
 		}
 		return response;
 		} catch (Exception e) {
-			response.setSuccessful(false);
+			response.setSuccesful(false);
 			response.setMessage(e.getMessage());
 		}
 		return response;
