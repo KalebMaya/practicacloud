@@ -1,7 +1,5 @@
 package com.everis.practicacloudcomprarest.response;
 
-import java.math.BigDecimal;
-
 import com.everis.practicacloudcomprarest.model.Producto;
 
 public class ProductoResponse {
@@ -9,7 +7,7 @@ public class ProductoResponse {
 private boolean successful;
 private String message;
 private Producto value;
-
+private String ip;
 
 public boolean isSuccessful() {
 	return successful;
@@ -28,6 +26,12 @@ public Producto getValue() {
 }
 public void setValue(Producto value) {
 	this.value = value;
+}
+public String getIp() {
+	return ip;
+}
+public void setIp(String ip) {
+	this.ip = ip;
 }
 
 }
