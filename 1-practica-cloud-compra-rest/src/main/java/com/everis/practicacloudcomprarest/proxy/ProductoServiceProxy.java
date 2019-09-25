@@ -19,5 +19,5 @@ public interface ProductoServiceProxy {
 	@PostMapping("/insertarCompra/idProducto/{idProducto}/cantidad/{cantidad}")
 	public Compra insertarCompra(@PathVariable int idProducto, @PathVariable int cantidad);
 	@PutMapping("/modificarInventario/id/{id}/cantidad/{cantidad}")
-	public Producto actualizarStock(@PathVariable Integer id, @PathVariable int cantidad);
+	public Producto actualizarStock(@PathVariable Integer id, @PathVariable int cantidad); 
 }
