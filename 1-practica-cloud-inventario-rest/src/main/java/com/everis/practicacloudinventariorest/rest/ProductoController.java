@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.practicacloudinventariorest.model.Producto;
@@ -45,7 +45,7 @@ public class ProductoController {
 		}
 	}
 	
-	@PostMapping("/modificarInventario/id/{id}/cantidad/{cantidad}")
+	@PutMapping("/modificarInventario/id/{id}/cantidad/{cantidad}")
 	public ProductoValueResponse actualizarStock(@PathVariable Integer id, @PathVariable int cantidad) {
 		ProductoValueResponse response = new ProductoValueResponse();
 		try {
