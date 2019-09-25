@@ -12,9 +12,21 @@ public class ProductoService {
 	@Autowired
 	ProductoRepository productoRepositorio;
 	
-	public Producto findById(Long id) {
+	public Producto findById(int id) {
 		return productoRepositorio.findById(id).get();
 	}
 	
-
+	public Producto actualizaStock(int id, int cantidad) {
+		Producto producto = productoRepositorio.findById(id).get();
+		if (producto == null) {
+			return null;
+		}
+		if(producto.getStock()-cantidad < 0 ) {
+			return null;
+		} else {
+			producto.setStock(producto.getStock()-cantidad);
+			return productoRepositorio.save(producto);
+		}
+		
+	}
 }
