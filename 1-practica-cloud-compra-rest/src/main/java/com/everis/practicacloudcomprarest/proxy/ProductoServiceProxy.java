@@ -11,8 +11,8 @@ import com.everis.practicacloudcomprarest.model.Compra;
 import com.everis.practicacloudcomprarest.model.Producto;
 import com.everis.practicacloudcomprarest.response.ProductoResponse;
 
-@FeignClient(name="producto-service")
-@RibbonClient(name="producto-service")
+@FeignClient(name="PRACTICA-CLOUD-INVENTARIO-REST")
+@RibbonClient(name="PRACTICA-CLOUD-INVENTARIO-REST")
 public interface ProductoServiceProxy {
 	@GetMapping("/consultarInventario/id/{id}")
 	public ProductoResponse retrieveProducto(@PathVariable Integer id);
