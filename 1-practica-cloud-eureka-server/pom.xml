@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.everis</groupId>
-	<artifactId>1-practica-cloud-config-server</artifactId>
+	<artifactId>1-practica-cloud-eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>1-practica-cloud-config-server</name>
+	<name>1-practica-cloud-eureka-server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -21,9 +21,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,8 +38,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>
+				spring-cloud-starter-netflix-eureka-server
+			</artifactId>
 		</dependency>
 	</dependencies>
 
