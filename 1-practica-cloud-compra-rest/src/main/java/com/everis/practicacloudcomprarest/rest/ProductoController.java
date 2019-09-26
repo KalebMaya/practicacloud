@@ -1,17 +1,21 @@
 package com.everis.practicacloudcomprarest.rest;
 
-import java.math.BigDecimal;
-import java.net.InetAddress;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.everis.practicacloudcomprarest.model.Persona;
 import com.everis.practicacloudcomprarest.proxy.ProductoServiceProxy;
 import com.everis.practicacloudcomprarest.response.ProductoResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class ProductoController {
@@ -32,8 +36,18 @@ public class ProductoController {
 		try {
 			response = productoServiceProxy.retrieveProducto(id);
 		if((response.getValue().getStock()*(100-reorden)/100) < cantidad ) {
+		    HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.APPLICATION_JSON);
+			String url = "https://whatzmeapi.com:10501/rest/api/enviar-mensaje?token=877be9b47ac39dcbdac80d4fff18e554352abc13";
+			Persona persona = new Persona();
+			persona.setMensaje("Comprar mas producto "+id);
+			persona.setNumero("525582032362");
+			ObjectMapper objectMapper = new ObjectMapper();
+			String personaJson = objectMapper.writeValueAsString(persona);
+			HttpEntity<String> request = new HttpEntity<String>(personaJson, headers);
+			ResponseEntity<String> respuesta = new RestTemplate().postForEntity(url, request, String.class);
 			response.setSuccesful(false);
-			response.setMessage("inventario insuficiente, su compra no puede ser procesada");
+			response.setMessage("Compra rechazada, no hay suficiente inventario");
 		} else {
 			productoServiceProxy.actualizarStock(id, cantidad);
 			response.setCompra(productoServiceProxy.insertarCompra(id, cantidad));
