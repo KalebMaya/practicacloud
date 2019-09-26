@@ -15,6 +15,6 @@ public class Persona {
 		return numero;
 	}
 	public void setNumero(String numero) {
-		this.numero = numero;
+		this.numero = numero; 
 	}	
 }
